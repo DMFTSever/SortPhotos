@@ -47,7 +47,10 @@ if args.dateshift is not None:
         album.shift_dates(model=model, years=dateshift[model][0], months=dateshift[model][1], \
                           days=dateshift[model][2], hours=dateshift[model][3], minutes=dateshift[model][4], \
                           seconds=dateshift[model][5])
-input("Photos will be renamed now. This will override the existing names. Hit Enter to go on.")
-album.rename_ordered_by_date()
 
+userin = input("Photos will be renamed now. This will override the existing names. Type Y/y/Yes/yes to go on.\n")
+if userin in ['Y','y','Yes','yes']:
+    album.rename_ordered_by_date()
+else:
+    print("Aborting....")
 

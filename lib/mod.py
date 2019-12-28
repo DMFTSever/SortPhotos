@@ -87,18 +87,22 @@ class Album:
 
     def shift_dates(self, model, years=0, months=0, days=0, hours=0, minutes=0, seconds=0):
         shift = np.array([years, months, days, hours, minutes, seconds], dtype=int)
+        print("Using shifted dates for model {}. Shift: {}".format(model, str(shift[0])+'y:'+str(abs(shift[1]))+'m:'\
+              +str(abs(shift[2]))+'d:'+str(abs(shift[3]))+'h:'+str(abs(shift[4]))+'m:'+str(abs(shift[5]))+"s"))
         for photo in self.photo_list:
             if photo.model.replace(" ", "") == model:
                 photo.shift_date(shift=shift)
             else:
                 pass
+
+    def find_rename(self, path, newpath):
+        for photo in self.photo_list:
+            if photo.path==path:
+                photo.rename_path(newpath=newpath)
+                break
  
     def rename_ordered_by_date(self):
         print('Attempting to reorder all photos according to their date of origin.')
-        newfolder = self.folder_path.strip("/") + "_ordered/"
-        if not os.path.exists(newfolder):
-            print("creating new directory")
-            os.mkdir(newfolder)
         ordered_list = [self.photo_list[0]]
         for photo in self.photo_list[1:]:
             for i in range(0,len(ordered_list)):
@@ -111,8 +115,8 @@ class Album:
                     pass
         self.photo_list[:] = ordered_list[:]
         for i in range(0,len(self.photo_list)):
-            new_path = newfolder + str(i+1) + '.jpg'
-            os.rename(self.photo_list[i].path, new_path)
-            self.photo_list[i].path = new_path
-        os.rename(newfolder, self.folder_path)
+            new_path = self.folder_path + str(i+1) + '.jpg'
+            if os.path.exists(new_path) and not self.photo_list[i].path==new_path:
+                self.find_rename(path=new_path, newpath=new_path.strip(".jpg")+"_old.jpg")
+            self.photo_list[i].rename_path(newpath=new_path)
         print('-> Renamed all photos according to their date of origin.')
