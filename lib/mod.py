@@ -88,13 +88,17 @@ class Album:
     def shift_dates(self, model, years=0, months=0, days=0, hours=0, minutes=0, seconds=0):
         shift = np.array([years, months, days, hours, minutes, seconds], dtype=int)
         for photo in self.photo_list:
-            if photo.model == model:
+            if photo.model.replace(" ", "") == model:
                 photo.shift_date(shift=shift)
             else:
                 pass
  
     def rename_ordered_by_date(self):
         print('Attempting to reorder all photos according to their date of origin.')
+        newfolder = self.folder_path.strip("/") + "_ordered/"
+        if not os.path.exists(newfolder):
+            print("creating new directory")
+            os.mkdir(newfolder)
         ordered_list = [self.photo_list[0]]
         for photo in self.photo_list[1:]:
             for i in range(0,len(ordered_list)):
@@ -107,7 +111,8 @@ class Album:
                     pass
         self.photo_list[:] = ordered_list[:]
         for i in range(0,len(self.photo_list)):
-            new_path = self.folder_path + str(i+1) + '.jpg'
+            new_path = newfolder + str(i+1) + '.jpg'
             os.rename(self.photo_list[i].path, new_path)
             self.photo_list[i].path = new_path
+        os.rename(newfolder, self.folder_path)
         print('-> Renamed all photos according to their date of origin.')
