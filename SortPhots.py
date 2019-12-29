@@ -6,12 +6,12 @@ import argparse
 import numpy as np
 
 def dateshift(inputstr):
-   model, temp1, temp2 = inputstr.split("-")
-   if temp1[0] == 'm':
-       temp1 = temp1.strip("m")
-       shift = -np.array(temp1.split(":") + temp2.split(":"), dtype=int)
+   model, temp = inputstr.split("-")
+   if temp[0] == 'm':
+       temp = temp.strip("m")
+       shift = -np.array(temp.split(":"), dtype=int)
    else:
-       shift = np.array(temp1.split(":") + temp2.split(":"), dtype=int)
+       shift = np.array(temp.split(":"), dtype=int)
    return [model,shift]
 
 parser = argparse.ArgumentParser(description="This script renames the photos contained   \
@@ -25,7 +25,7 @@ parser.add_argument("--info", help="If this option is specified only some inform
                                     takes place", \
                     default=False, action="store_true")
 parser.add_argument("--dateshift", help="Provide the camera models names and the date shifts.\
-                                         <model1-yyyy:mm:dd-hh:mm:ss> <model2-yyyy:mm:dd-hh:mm:ss> \
+                                         <model1-yyyy:mm:dd:hh:mm:ss> <model2-yyyy:mm:dd:hh:mm:ss> \
                                          ... if the shift is negative provide myyyy, neclect all \
                                          spaces in the modelname", \
                     type=dateshift, nargs='*')
@@ -48,7 +48,8 @@ if args.dateshift is not None:
                           days=dateshift[model][2], hours=dateshift[model][3], minutes=dateshift[model][4], \
                           seconds=dateshift[model][5])
 
-userin = input("Photos will be renamed now. This will override the existing names. Type Y/y/Yes/yes to go on.\n")
+userin = input("Photos in folder \"{}\" will be renamed now. ".format(album.folder_path) + \
+               "This will override the existing names. Type Y/y/Yes/yes to go on.\n")
 if userin in ['Y','y','Yes','yes']:
     album.rename_ordered_by_date()
 else:

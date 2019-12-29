@@ -87,7 +87,7 @@ class Album:
 
     def shift_dates(self, model, years=0, months=0, days=0, hours=0, minutes=0, seconds=0):
         shift = np.array([years, months, days, hours, minutes, seconds], dtype=int)
-        print("Using shifted dates for model {}. Shift: {}".format(model, str(shift[0])+'y:'+str(abs(shift[1]))+'m:'\
+        print("Shifting dates for model {}. Shift: {}".format(model, str(shift[0])+'y:'+str(abs(shift[1]))+'m:'\
               +str(abs(shift[2]))+'d:'+str(abs(shift[3]))+'h:'+str(abs(shift[4]))+'m:'+str(abs(shift[5]))+"s"))
         for photo in self.photo_list:
             if photo.model.replace(" ", "") == model:
@@ -113,10 +113,10 @@ class Album:
                     ordered_list.append(photo)
                 else:
                     pass
-        self.photo_list[:] = ordered_list[:]
-        for i in range(0,len(self.photo_list)):
+        for i in range(0,len(ordered_list)):
             new_path = self.folder_path + str(i+1) + '.jpg'
-            if os.path.exists(new_path) and not self.photo_list[i].path==new_path:
+            if os.path.exists(new_path) and not ordered_list[i].path==new_path:
                 self.find_rename(path=new_path, newpath=new_path.strip(".jpg")+"_old.jpg")
-            self.photo_list[i].rename_path(newpath=new_path)
+            ordered_list[i].rename_path(newpath=new_path)
+        self.photo_list[:] = ordered_list[:]
         print('-> Renamed all photos according to their date of origin.')
