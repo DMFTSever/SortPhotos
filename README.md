@@ -28,9 +28,9 @@ Running:
      so the originals do not get changed and accidentally overwritten
   2. Run the script from the folder above and give the album folder as input:
 
-       $ python3 \<path to SortPhotos.py\> folder_path
-
-       or
-
-       $ python3 <path to SortPhotos.py> --help for help
+       $ python3 \<path to SortPhotos.py\> folder_path --> to run the basic script
+         
+       $ python3 \<path to SortPhotos.py\> --help --> for help
+         
+       $ python3 \<path to SortPhotos.py\> folder_path --info --> to obtain basic information about the folder instead of reordering
 
