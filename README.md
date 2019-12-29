@@ -1,6 +1,7 @@
-# THIS IS A SCRIPT TO SORT PHOTOS BY THE DATE THEY WERE TAKEN
-# 28.12.2019
+# Photo Sorting Script 
 =============================================================
+## 28.12.2019
+-------------
 
 SortPhotos takes a folder and renames the photos with ascending numbers
 corresponding to the date they were taken. It does allow to shift the
@@ -14,14 +15,14 @@ this script.
 Maintainer:
 Severino Adler
 
-#Requirements:
---------------
+##Requirements:
+---------------
 
   - Python3
   - python modules: exifread, argeparse, numpy, fnmatch 
 
-#Running:
----------
+##Running:
+----------
 
   1. Copy all photos into a you want to rename into a new directory so 
      so the originals do not get changed and accidentally overwritten
