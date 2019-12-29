@@ -26,8 +26,8 @@ parser.add_argument("--info", help="If this option is specified only some inform
                     default=False, action="store_true")
 parser.add_argument("--dateshift", help="Provide the camera models names and the date shifts.\
                                          <model1-yyyy:mm:dd:hh:mm:ss> <model2-yyyy:mm:dd:hh:mm:ss> \
-                                         ... if the shift is negative provide myyyy, neclect all \
-                                         spaces in the modelname", \
+                                         ... if the shift is negative provide date with an m infront\
+                                         myyyy, z.B. m1997. Neclect all spaces in the modelname", \
                     type=dateshift, nargs='*')
 args = parser.parse_args()
 
