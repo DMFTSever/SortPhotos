@@ -63,6 +63,23 @@ class Album:
         string += 'Latest date in album: {}\n'.format(upper)
 
         return string
+
+    def german_info(self):
+        string = 'Pfad dieses Albums:\n'
+        string += self.folder_path + '\n'
+        string += 'Anzahl der Fotos in diesem Album: {}\n'.format(len(self.photo_list))
+	
+        camera_models = self.get_camera_models()	
+        string += 'Kameramodele in diesem Album: ' 
+        for model in camera_models:
+            string += "\""+model+"\"" + ' '
+        string += "\n"
+	
+        lower, upper  = self.get_date_boundaries()
+        string += 'Frühestes Aufnahmedatum in diesem Album: {}\n'.format(lower)
+        string += 'Spätestes Aufnahmedatum in diesem Album: {}\n'.format(upper)
+
+        print(string)
     
     def get_camera_models(self):
         models = []
