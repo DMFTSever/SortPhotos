@@ -6,7 +6,7 @@ import argparse
 import numpy as np
 
 def dateshift(inputstr):
-   model, temp = inputstr.split("-")
+   model, temp = inputstr.split("::")
    if temp[0] == 'm':
        temp = temp.strip("m")
        shift = -np.array(temp.split(":"), dtype=int)
@@ -22,10 +22,10 @@ parser.add_argument("--info", help="Gibt informationen über den Zielordner aus 
                     default=False, action="store_true")
 parser.add_argument("--zeitverschiebung", help="Angeben um das Aufnahmedatum aller Fotos eines oder mehrerer\
                                                 Kameramodels zu Ordnungszwecken entsprechend zu verschieben.\
-                                                <model1-yyyy:mm:dd:hh:mm:ss> <model2-yyyy:mm:dd:hh:mm:ss> \
-                                                ... Soll die Verschiebung negativ sein muss dem Jahr ein m
+                                                <model1::yyyy:mm:dd:hh:mm:ss> <model2::yyyy:mm:dd:hh:mm:ss> \
+                                                ... Soll die Verschiebung negativ sein muss dem Jahr ein m \
                                                 vorangestellt sein: myyyy, z.B. m1997. Im Modelnamen müssen\
-                                                alle Leerzeichen vernachlässigt werden. Die Modelnamen können
+                                                alle Leerzeichen vernachlässigt werden. Die Modelnamen können \
                                                 mit --info angezeigt werden", \
                     type=dateshift, nargs='*')
 args = parser.parse_args()
@@ -53,4 +53,6 @@ if userin in ['J','j','Ja','ja']:
     album.rename_ordered_by_date()
 else:
     print("Abbrechen....")
+
+print("Fotos erfolgreich umbenannt.")
 
