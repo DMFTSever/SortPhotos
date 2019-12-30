@@ -33,7 +33,7 @@ args = parser.parse_args()
 album = mod.Album(folder_path=args.zielordner)
 
 if args.info == True:
-    print(album)
+    album.german_info()
     quit()
 
 if args.zeitverschiebung is not None:
