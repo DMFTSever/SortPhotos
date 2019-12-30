@@ -60,7 +60,7 @@ class Album:
 	
         lower, upper  = self.get_date_boundaries()
         string += 'Earliest date in album: {}\n'.format(lower)
-        string += 'Latest date in album: {}\n'.format(upper)
+        string += 'Latest date in album: {}'.format(upper)
 
         return string
 
@@ -77,7 +77,7 @@ class Album:
 	
         lower, upper  = self.get_date_boundaries()
         string += 'Frühestes Aufnahmedatum in diesem Album: {}\n'.format(lower)
-        string += 'Spätestes Aufnahmedatum in diesem Album: {}\n'.format(upper)
+        string += 'Spätestes Aufnahmedatum in diesem Album: {}'.format(upper)
 
         print(string)
     
